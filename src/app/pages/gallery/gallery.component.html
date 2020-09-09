@@ -1,0 +1,25 @@
+<div class="gallery py-5">
+    <div class="container py-sm-3">
+            <input type="search" class="" name="pretraga" id="pretraga" placeholder="Search.."/>
+        <h2 class="heading text-capitalize mb-sm-5 mb-3"> Categories </h2>
+        <div class="banner-bottom">
+            <div class="container-fluid">
+                <div class="banner_bottom_agile_grids">
+                    <!-- <div class="row wthree_banner_bottom_right_grids pr-sm-3"> -->
+                       <!--kategorije-->
+                        <app-categories (categoryEvent)="catNum=$event" class="row wthree_banner_bottom_right_grids pr-sm-3"></app-categories>
+                        <div class="clearfix"> </div>
+                    <!-- </div> -->
+                    <!-- <div class="clearfix"> </div> -->
+                </div>
+            </div>
+        </div>
+        <h2 class="heading text-capitalize mb-sm-5 mb-3"> Gallery </h2>
+        <!-- <div class="row gallery-grids" id="galerija"> -->
+            <!--galerija-->
+            <app-items [parentData]="numb" [categoryNumber]="catNum" class="row gallery-grids" id="galerija"></app-items>
+        <!-- </div> -->
+        <!--paginacija-->
+            <app-pagination (childEvent)="numb=$event" [categoryNumber]="catNum"></app-pagination>
+    </div>
+</div>

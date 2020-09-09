@@ -1,0 +1,149 @@
+<div id="pricing" class="container">
+  <h2><b>Users</b></h2>
+  <input type="button" value="Add User" class="btn btn-secondary" (click)="displayUserForm()">
+  <form [ngStyle]="{'display' : addUserDisplay ? 'block' : 'none'}" [formGroup]="userInsertForm" (ngSubmit)="userInsert()">
+    <div class="form-group has-success">
+        <label for="cc-name" class="control-label mb-1">First name</label>
+        <input formControlName="first_name" name="first_name_update" id="first_name_update" type="text" class="form-control" >
+        <span *ngIf="!userInsertForm.get('first_name').valid && userInsertForm.get('first_name').touched" 
+        class="help-block field-validation-valid" data-valmsg-for="cc-name" style="color:red">
+        Please Enter First Name!</span>
+    </div>
+    <div class="form-group">
+        <label for="cc-number" class="control-label mb-1">Last name</label>
+        <input formControlName="last_name" type="text" name="last_name_update" id="last_name_update" class="form-control "/>
+        <span *ngIf="!userInsertForm.get('last_name').valid && userInsertForm.get('last_name').touched" 
+        class="help-block field-validation-valid" data-valmsg-for="cc-name" style="color:red">
+        Please Enter Last Name!</span>
+    </div>
+    <div class="form-group">
+        <label for="cc-number" class="control-label mb-1">Email</label>
+        <input formControlName="email" type="email" name="email_update" id="email_update" class="form-control "/>
+        <span *ngIf="!userInsertForm.get('email').valid && userInsertForm.get('email').touched" 
+        class="help-block field-validation-valid" data-valmsg-for="cc-name" style="color:red">
+        Please Enter valid email!</span>
+    </div>
+    <div class="form-group">
+        <label for="cc-number" class="control-label mb-1">Password</label>
+        <input formControlName="password" type="text" name="password_update" id="password_update" class="form-control "/>
+        <span *ngIf="!userInsertForm.get('password').valid && userInsertForm.get('password').touched" 
+        class="help-block field-validation-valid" data-valmsg-for="cc-name" style="color:red">
+        Password must contain one uppercase letter and one number!</span>
+    </div>
+    <div class="row form-group">
+        <div class="col col-md-3">
+            <label for="select" class=" form-control-label">Roles</label>
+        </div>
+        <div class="col-12 col-md-9">
+            <select name="list_update" id="list_update" formControlName="role">
+                <option value="" [selected]="selected">Choose...</option>
+                  <option *ngFor="let r of roles" value="{{r.role_id}}">{{r.role_name}}</option>
+            </select>
+            <span *ngIf="!userInsertForm.get('role').valid && userInsertForm.get('role').touched" 
+        class="help-block field-validation-valid" data-valmsg-for="cc-name" style="color:red">
+        Please Select Role!</span>
+        </div>
+    </div>
+    <div>
+        <button name="btnUpdateUser" value="Update" id="btnUpdateUser" type="submit"  class="btn btn-lg btn-info btn-block">
+            Insert
+        </button>
+    </div>
+</form><br>
+  <table class="table table-bordered table-striped text-center">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Role</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let u of users; index as i;">
+        <th scope="row">{{i+1}}</th>
+        <td>{{u.first_name}}</td>
+        <td>{{u.last_name}}</td>
+        <td>{{u.email}}</td>
+        <td>{{u.uloga}}</td>
+        <td><a routerLink="/edit_user/{{u.user_id}}" class="btn btn-secondary">Edit</a></td>
+        <td><input type="button" value="Delete" class="btn btn-secondary" (click)="deleteUser(u.user_id)"></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- container -->
+  <div id="pricing" class="container">
+  <h2><b>Gallery</b></h2>
+  <input type="button" value="Add Post" class="btn btn-secondary" (click)="displayPostForm()">
+  <form [ngStyle]="{'display' : addPostDisplay ? 'block' : 'none'}" [formGroup]="postInsertForm" (ngSubmit)="postInsert()">
+    <div class="form-group has-success">
+        <label for="cc-name" class="control-label mb-1">Title</label>
+        <input formControlName="title" name="first_name_update" id="first_name_update" type="text" class="form-control" >
+        <span *ngIf="!postInsertForm.get('title').valid && postInsertForm.get('title').touched" 
+        class="help-block field-validation-valid" data-valmsg-for="cc-name" style="color:red">
+        Please Enter Title!</span>
+    </div>
+    <div class="form-group">
+        <label for="cc-number" class="control-label mb-1">Description</label>
+        <input formControlName="desc" type="text" name="last_name_update" id="last_name_update" class="form-control "/>
+        <span *ngIf="!postInsertForm.get('desc').valid && postInsertForm.get('desc').touched" 
+        class="help-block field-validation-valid" data-valmsg-for="cc-name" style="color:red">
+        Please Enter Description!</span>
+    </div>
+    <div class="form-group">
+      <label for="cc-number" class="control-label mb-1">Image</label>
+      <input (change)="uploadImage($event)" type="file" name="last_name_update" id="last_name_update" class="form-control "/>
+      <span *ngIf="imgErr" 
+      class="help-block field-validation-valid" data-valmsg-for="cc-name" style="color:red">
+      Allowed formats: jpg, jpeg, png!</span>
+  </div>
+    <div class="row form-group">
+        <div class="col col-md-3">
+            <label for="select" class=" form-control-label">Categories</label>
+        </div>
+        <div class="col-12 col-md-9">
+            <select name="list_update" id="list_update" formControlName="category">
+                <option value="" [selected]="selected">Choose...</option>
+                  <option *ngFor="let c of categories" value="{{c.categories_id}}">{{c.name}}</option>
+            </select>
+            <span *ngIf="!postInsertForm.get('category').valid && postInsertForm.get('category').touched" 
+        class="help-block field-validation-valid" data-valmsg-for="cc-name" style="color:red">
+        Please Select Category!</span>
+        </div>
+    </div>
+    <div>
+        <button name="btnUpdateUser" value="Update" id="btnUpdateUser" type="submit"  class="btn btn-lg btn-info btn-block">
+            Insert
+        </button>
+    </div>
+</form><br>
+  <table class="table table-bordered table-striped text-center">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Image</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Categories</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let g of gallery; index as i;">
+        <th scope="row">{{i+1}}</th>
+        <td><img src="http://localhost:8000/images//{{g.image}}" alt="alt" style="width:50px;height:50px;"></td>
+        <td>{{g.title}}</td>
+        <td>{{g.description}}</td>
+        <td>{{g.ime}}</td>
+        <td><a routerLink="/edit_post/{{g.gallery_id}}" class="btn btn-secondary">Edit</a></td>
+        <td><input type="button" value="Delete" class="btn btn-secondary" (click)="deletePost(g.gallery_id)"></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>

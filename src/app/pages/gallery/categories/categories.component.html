@@ -1,0 +1,14 @@
+<div class="col-lg-3 col-sm-6 mt-sm-0 mt-3 banner_bottom_right_grid" *ngFor="let k of categories">
+    <div class="view {{k.color}} view-tenth">
+        <div class="agile_text_box">
+            <i class="{{k.class}}" aria-hidden="true"></i>
+            <h3>{{k.name}}</h3>
+        </div>
+        <a href="#"class="cat" data-id="{{k.categories_id}}" (click)="catEvent(k.categories_id); false">
+            <div class="mask">
+                <img src="{{'assets/images/'+k.images}}" class="img-responsive" alt="" />
+            </div>
+        </a>
+    </div>
+</div>
+<div class="clearfix"> </div>

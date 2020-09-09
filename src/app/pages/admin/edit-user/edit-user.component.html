@@ -1,0 +1,51 @@
+<div class="container" *ngIf="user">
+    <form [formGroup]="userEditForm" (ngSubmit)="userUpdate()">
+        <div class="form-group has-success">
+            <label for="cc-name" class="control-label mb-1">First name</label>
+            <input formControlName="first_name" name="first_name_update" id="first_name_update" type="text" class="form-control" >
+            <span *ngIf="!userEditForm.get('first_name').valid && userEditForm.get('first_name').touched" 
+            class="help-block field-validation-valid" data-valmsg-for="cc-name" style="color:red">
+            Please Enter First Name!</span>
+        </div>
+        <div class="form-group">
+            <label for="cc-number" class="control-label mb-1">Last name</label>
+            <input formControlName="last_name" type="text" name="last_name_update" id="last_name_update" class="form-control "/>
+            <span *ngIf="!userEditForm.get('last_name').valid && userEditForm.get('last_name').touched" 
+            class="help-block field-validation-valid" data-valmsg-for="cc-name" style="color:red">
+            Please Enter Last Name!</span>
+        </div>
+        <div class="form-group">
+            <label for="cc-number" class="control-label mb-1">Email</label>
+            <input formControlName="email" type="email" name="email_update" id="email_update" class="form-control "/>
+            <span *ngIf="!userEditForm.get('email').valid && userEditForm.get('email').touched" 
+            class="help-block field-validation-valid" data-valmsg-for="cc-name" style="color:red">
+            Please Enter valid email!</span>
+        </div>
+        <div class="form-group">
+            <label for="cc-number" class="control-label mb-1">Password</label>
+            <input formControlName="password" type="text" name="password_update" id="password_update" class="form-control "/>
+            <span *ngIf="!userEditForm.get('password').valid && userEditForm.get('password').touched" 
+            class="help-block field-validation-valid" data-valmsg-for="cc-name" style="color:red">
+            Password must contain one uppercase letter and one number!</span>
+        </div>
+        <div class="row form-group">
+            <div class="col col-md-3">
+                <label for="select" class=" form-control-label">Roles</label>
+            </div>
+            <div class="col-12 col-md-9">
+                <select name="list_update" id="list_update" formControlName="role">
+                    <option value="0">Choose...</option>
+                      <option *ngFor="let r of roles" value="{{r.role_id}}">{{r.role_name}}</option>
+                </select>
+                <span *ngIf="!userEditForm.get('role').valid && userEditForm.get('role').touched" 
+            class="help-block field-validation-valid" data-valmsg-for="cc-name" style="color:red">
+            Please Select Role!</span>
+            </div>
+        </div>
+        <div>
+            <button name="btnUpdateUser" value="Update" id="btnUpdateUser" type="submit"  class="btn btn-lg btn-info btn-block">
+                Update
+            </button>
+        </div>
+    </form><br>
+</div>

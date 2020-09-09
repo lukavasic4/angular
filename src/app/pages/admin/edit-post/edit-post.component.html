@@ -1,0 +1,44 @@
+<div class="container" *ngIf="post">
+    <form [formGroup]="postEditForm" (ngSubmit)="postUpdate()">
+        <div class="form-group has-success">
+            <label for="cc-name" class="control-label mb-1">Title</label>
+            <input formControlName="title" name="first_name_update" id="first_name_update" type="text" class="form-control" >
+            <span *ngIf="!postEditForm.get('title').valid && postEditForm.get('title').touched" 
+            class="help-block field-validation-valid" data-valmsg-for="cc-name" style="color:red">
+            Please Enter Title!</span>
+        </div>
+        <div class="form-group">
+            <label for="cc-number" class="control-label mb-1">Description</label>
+            <input formControlName="desc" type="text" name="last_name_update" id="last_name_update" class="form-control "/>
+            <span *ngIf="!postEditForm.get('desc').valid && postEditForm.get('desc').touched" 
+            class="help-block field-validation-valid" data-valmsg-for="cc-name" style="color:red">
+            Please Enter Description!</span>
+        </div>
+        <div class="form-group">
+          <label for="cc-number" class="control-label mb-1">Image</label>
+          <input (change)="uploadImage($event)" type="file" name="last_name_update" id="last_name_update" class="form-control "/>
+          <span *ngIf="imgErr" 
+          class="help-block field-validation-valid" data-valmsg-for="cc-name" style="color:red">
+          Allowed formats: jpg, jpeg, png!</span>
+      </div>
+        <div class="row form-group">
+            <div class="col col-md-3">
+                <label for="select" class=" form-control-label">Categories</label>
+            </div>
+            <div class="col-12 col-md-9">
+                <select name="list_update" id="list_update" formControlName="category">
+                    <option value="0">Choose...</option>
+                      <option *ngFor="let c of categories" value="{{c.categories_id}}">{{c.name}}</option>
+                </select>
+                <span *ngIf="!postEditForm.get('category').valid && postEditForm.get('category').touched" 
+            class="help-block field-validation-valid" data-valmsg-for="cc-name" style="color:red">
+            Please Select Category!</span>
+            </div>
+        </div>
+        <div>
+            <button name="btnUpdateUser" value="Update" id="btnUpdateUser" type="submit"  class="btn btn-lg btn-info btn-block">
+                Update
+            </button>
+        </div>
+    </form><br>
+</div>

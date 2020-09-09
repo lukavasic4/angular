@@ -1,0 +1,9 @@
+<div class="row m-4">
+    <div class="col text-center">
+        <div class="social-icons mt-2">
+            <ul>
+                <li class='page' *ngFor="let i of finalNum" data-id="{{i}}" (click)="fireEmitt(i)"><a>{{i}}</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
